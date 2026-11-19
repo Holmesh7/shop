@@ -143,11 +143,13 @@
 }
 .cat-detail {
   display: inline-block;
-  margin-top: 4px;
-  font-size: 12px;
-  color: #8a7a58;
-  border-bottom: 1px dashed #cfc7b8;
-  line-height: 1.4;
+  margin-top: 6px;
+  padding: 3px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--red);
+  border-bottom: 1px dashed rgba(184, 28, 34, 0.45);
+  line-height: 1.5;
 }
 .cat-detail:active { color: var(--red); border-color: var(--red); }
 
@@ -160,12 +162,13 @@
 }
 .cat-btn-plus,
 .cat-btn-minus {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 1px solid var(--line);
   background: #faf8f4;
-  font-size: 17px;
+  font-size: 24px;
+  font-weight: 600;
   line-height: 1;
   color: #6b6357;
   padding: 0;
@@ -175,8 +178,8 @@
 .cat-qty {
   flex: 1;
   text-align: center;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   color: var(--text);
   font-variant-numeric: tabular-nums;
 }
@@ -238,8 +241,8 @@
   border: 1px solid var(--line);
   border-radius: 10px;
   font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", monospace;
-  font-size: 13.5px;
-  line-height: 1.9;
+  font-size: 16px;
+  line-height: 2;
   color: var(--text);
   white-space: pre-wrap;
   word-break: break-all;
@@ -249,9 +252,11 @@
   overflow-y: auto;
 }
 .cat-copy-tip {
-  margin-top: 10px;
-  font-size: 12px;
-  color: var(--muted);
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--text);
   text-align: center;
 }
 

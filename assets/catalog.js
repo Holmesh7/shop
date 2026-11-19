@@ -75,7 +75,7 @@
       var picked = qty > 0;
       html +=
         '<div class="cat-card' + (picked ? ' cat-picked' : '') + '" data-id="' + p.id + '">' +
-          '<div class="cat-img-wrap" data-act="open">' +
+          '<div class="cat-img-wrap">' +
             renderMedia(p) +
           '</div>' +
           '<div class="cat-info">' +
@@ -83,7 +83,7 @@
             '<div class="cat-unit">' + escapeHtml(p.unit || '') + '</div>' +
             '<div class="cat-price">' + fmtPrice(p.price) + '</div>' +
             (p.detail_url
-              ? '<a class="cat-detail" href="' + escapeHtml(p.detail_url) + '" target="_blank" rel="noopener noreferrer">查看详情 ›</a>'
+              ? '<a class="cat-detail" href="' + escapeHtml(p.detail_url) + '" target="_blank" rel="noopener noreferrer">点击查看演示图片或视频 ›</a>'
               : '') +
           '</div>' +
           '<div class="cat-ctrl">' +
@@ -135,18 +135,20 @@
 
   // ---------- 清单文字 ----------
   function buildText() {
-    var ids = Object.keys(cat.cart);
     var lines = ['烟花清单', ''];
-    var count = 0, total = 0, i = 1;
-    ids.forEach(function (kid) {
-      var p = cat.products.find(function (x) { return String(x.id) === kid; });
-      if (!p) return;
-      var n = cat.cart[kid];
-      if (!(n > 0)) return;
+    var count = 0, total = 0;
+    // 按商品编号排序，清单上带编号，方便销售对应商品
+    var picked = cat.products.filter(function (p) {
+      return q(p.id) > 0;
+    }).sort(function (a, b) {
+      return (Number(a.seq) || 0) - (Number(b.seq) || 0);
+    });
+    picked.forEach(function (p) {
+      var n = q(p.id);
       count += n;
       total += Number(p.price) * n;
-      lines.push(i + '. ' + p.name + ' ×' + n + '  ' + fmtPrice(p.price));
-      i++;
+      var no = ('0' + (p.seq != null ? p.seq : '')).slice(-2);
+      lines.push(no + '  ' + p.name + ' ×' + n + '  ' + fmtPrice(p.price));
     });
     lines.push('');
     lines.push('合计：' + count + ' 件，' + fmtPrice(total));
@@ -210,9 +212,6 @@
       }
       return;
     }
-    // 其他区域点击（如图片）→ 默认 +1
-    setQ(id, q(id) + 1);
-    render();
   });
 
   dom.videoClose.addEventListener('click', function () {
