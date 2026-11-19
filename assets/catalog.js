@@ -27,7 +27,10 @@
     toast:     $('catToast'),
     videoMask: $('catVideoMask'),
     videoClose:$('catVideoClose'),
-    videoPlayer:$('catVideoPlayer')
+    videoPlayer:$('catVideoPlayer'),
+    imgMask:   $('catImgMask'),
+    imgClose:  $('catImgClose'),
+    imgView:   $('catImgView')
   };
 
   // ---------- 工具 ----------
@@ -75,7 +78,7 @@
       var picked = qty > 0;
       html +=
         '<div class="cat-card' + (picked ? ' cat-picked' : '') + '" data-id="' + p.id + '">' +
-          '<div class="cat-img-wrap">' +
+          '<div class="cat-img-wrap"' + (p.image_url ? ' data-act="img"' : '') + '>' +
             renderMedia(p) +
           '</div>' +
           '<div class="cat-info">' +
@@ -83,8 +86,10 @@
             '<div class="cat-unit">' + escapeHtml(p.unit || '') + '</div>' +
             '<div class="cat-price">' + fmtPrice(p.price) + '</div>' +
             (p.detail_url
-              ? '<a class="cat-detail" href="' + escapeHtml(p.detail_url) + '" target="_blank" rel="noopener noreferrer">点击查看演示图片或视频 ›</a>'
-              : '') +
+              ? '<a class="cat-detail" href="' + escapeHtml(p.detail_url) + '" target="_blank" rel="noopener noreferrer">查看演示</a>'
+              : (p.image_url
+                ? '<button class="cat-detail cat-detail-btn" data-act="img">查看图片</button>'
+                : '')) +
           '</div>' +
           '<div class="cat-ctrl">' +
             '<button class="cat-btn-minus" data-act="minus" aria-label="减少">−</button>' +
@@ -212,6 +217,23 @@
       }
       return;
     }
+    if (act === 'img') {
+      var pi = cat.products.find(function (x) { return String(x.id) === id; });
+      if (pi && pi.image_url) {
+        dom.imgView.src = pi.image_url;
+        dom.imgView.alt = pi.name || '商品演示图';
+        dom.imgMask.hidden = false;
+      }
+      return;
+    }
+  });
+
+  dom.imgClose.addEventListener('click', function () {
+    dom.imgMask.hidden = true;
+    dom.imgView.removeAttribute('src');
+  });
+  dom.imgMask.addEventListener('click', function (e) {
+    if (e.target === dom.imgMask) dom.imgClose.click();
   });
 
   dom.videoClose.addEventListener('click', function () {
