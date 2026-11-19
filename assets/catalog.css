@@ -1,0 +1,303 @@
+/* ================= Catalog 客户展示页 ================= */
+
+.cat-header {
+  background: linear-gradient(135deg, var(--red) 0%, #d12a2f 55%, #a5151b 100%);
+  color: #fff;
+  padding: 20px 16px 22px;
+  position: relative;
+  overflow: hidden;
+}
+.cat-header::after {
+  content: "";
+  position: absolute;
+  right: -30px;
+  top: -40px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+}
+.cat-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+.cat-logo {
+  font-size: 36px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.18));
+}
+.cat-brand { flex: 1; }
+.cat-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.cat-sub {
+  font-size: 12.5px;
+  opacity: 0.85;
+  margin-top: 3px;
+}
+
+.cat-page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 14px 12px 120px;
+}
+
+.cat-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.cat-toolbar .search { flex: 1; height: 40px; font-size: 14px; }
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.cat-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: border-color 0.15s, box-shadow 0.15s;
+  display: flex;
+  flex-direction: column;
+}
+.cat-card.cat-picked {
+  border-color: rgba(184, 28, 34, 0.55);
+  box-shadow: 0 4px 14px rgba(184, 28, 34, 0.14);
+}
+
+.cat-img-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f6f3ee;
+  position: relative;
+  overflow: hidden;
+}
+.cat-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cat-ph {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  background: linear-gradient(135deg, #fff6d9 0%, #ffe8c2 100%);
+}
+
+.cat-video-btn {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 0;
+  color: #fff;
+  font-size: 13px;
+  padding: 0;
+  line-height: 32px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+}
+
+.cat-info {
+  padding: 9px 10px 4px;
+  flex: 1;
+}
+.cat-name {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.cat-unit {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.cat-price {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--red);
+  margin-top: 4px;
+}
+.cat-detail {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #8a7a58;
+  border-bottom: 1px dashed #cfc7b8;
+  line-height: 1.4;
+}
+.cat-detail:active { color: var(--red); border-color: var(--red); }
+
+.cat-ctrl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px 8px;
+  gap: 4px;
+}
+.cat-btn-plus,
+.cat-btn-minus {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: #faf8f4;
+  font-size: 17px;
+  line-height: 1;
+  color: #6b6357;
+  padding: 0;
+}
+.cat-btn-plus:active { background: var(--red); color: #fff; border-color: var(--red); }
+.cat-btn-minus:disabled { opacity: 0.35; cursor: not-allowed; }
+.cat-qty {
+  flex: 1;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.cat-empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 60px 0;
+  font-size: 14px;
+}
+
+.cat-net-err {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--danger);
+  font-size: 13.5px;
+}
+.cat-net-err button { margin-top: 12px; }
+
+/* 视频弹窗 */
+.cat-video-box {
+  width: 100%;
+  max-width: 640px;
+  background: #000;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 16px 50px rgba(0,0,0,0.4);
+}
+.cat-video-box video {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 80vh;
+  background: #000;
+}
+.cat-video-close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.55);
+  border: 0;
+  color: #fff;
+  font-size: 16px;
+  line-height: 34px;
+  text-align: center;
+  padding: 0;
+  z-index: 2;
+}
+
+/* 清单文字 */
+.cat-text {
+  margin: 0;
+  padding: 14px;
+  background: #faf8f4;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", monospace;
+  font-size: 13.5px;
+  line-height: 1.9;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-all;
+  user-select: text;
+  -webkit-user-select: text;
+  max-height: 46vh;
+  overflow-y: auto;
+}
+.cat-copy-tip {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* 底部悬浮栏 */
+.cat-sticky {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--line);
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 30;
+}
+.cat-sticky-info { flex: 1; min-width: 0; }
+.cat-sticky-cnt { font-size: 11.5px; color: var(--muted); }
+.cat-sticky-total { font-size: 21px; font-weight: 700; color: var(--red); line-height: 1.15; }
+.cat-sticky-go {
+  height: 46px;
+  padding: 0 22px;
+  border-radius: 23px;
+  border: 0;
+  background: var(--red);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(184, 28, 34, 0.3);
+}
+.cat-sticky-go:disabled {
+  background: #cfc9bf;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Catalog 页桌面端适配 */
+@media (min-width: 480px) {
+  .cat-grid { gap: 12px; }
+}
+@media (min-width: 620px) {
+  .cat-grid { grid-template-columns: repeat(3, 1fr); }
+  .cat-page { padding: 16px 16px 120px; }
+}
+@media (min-width: 960px) {
+  .cat-grid { grid-template-columns: repeat(4, 1fr); }
+}

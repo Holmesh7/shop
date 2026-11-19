@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#b81c22">
+<title>烟花特辑 · 商品挑选</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/catalog.css">
+</head>
+<body>
+
+<header class="cat-header">
+  <div class="cat-banner">
+    <div class="cat-logo">🎆</div>
+    <div class="cat-brand">
+      <div class="cat-title">烟花特辑</div>
+      <div class="cat-sub">浏览图片 · 观看视频 · 挑选清单发给老板</div>
+    </div>
+  </div>
+</header>
+
+<main class="cat-page">
+  <div class="cat-toolbar">
+    <input id="catSearch" class="search" type="search" placeholder="搜索品类，如 加特林 / 仙女棒">
+    <button class="btn small ghost" id="catReset">清空</button>
+  </div>
+
+  <section id="catProducts" class="cat-grid"></section>
+
+  <div class="cat-empty" id="catEmpty" hidden>没有匹配的商品</div>
+</main>
+
+<!-- 视频弹窗 -->
+<div class="modal" id="catVideoMask" hidden>
+  <div class="cat-video-box">
+    <button class="cat-video-close" id="catVideoClose">✕</button>
+    <video id="catVideoPlayer" controls playsinline></video>
+  </div>
+</div>
+
+<!-- 清单预览弹窗 -->
+<div class="modal" id="catListMask" hidden>
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>选好的清单</h3>
+      <button class="x" id="catListClose">✕</button>
+    </div>
+    <div class="modal-body">
+      <pre class="cat-text" id="catListText"></pre>
+      <div class="cat-copy-tip">点「复制清单」，粘贴到微信发给老板即可</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" id="catShareBtn" hidden>分享</button>
+      <button class="btn ghost" id="catListCancel">继续挑选</button>
+      <button class="btn primary" id="catCopyBtn">复制清单</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="catToast"></div>
+
+<!-- 底部悬浮栏 -->
+<div class="cat-sticky">
+  <div class="cat-sticky-info">
+    <div class="cat-sticky-cnt" id="catBarCnt">已选 0 件</div>
+    <div class="cat-sticky-total" id="catBarTotal">¥0</div>
+  </div>
+  <button class="cat-sticky-go" id="catListBtn" disabled>生成清单</button>
+</div>
+
+<!-- 依赖脚本 -->
+<script src="assets/config.js"></script>
+<script src="assets/catalog.js"></script>
+</body>
+</html>
